@@ -21,7 +21,6 @@
   <ItemGroup>
     <ClInclude Include="car_agent.h" />
     <ClInclude Include="doublylinkedlist.h" />
-    <ClInclude Include="main.h" />
     <ClInclude Include="station_agent.h" />
   </ItemGroup>
   <ItemGroup>

@@ -26,10 +26,10 @@ using namespace std;
 int main ()
 {
 	//create a station
-	doublelinkedlist* station_spot_list = new doublelinkedlist ();	//create a spotlist for a station
-	StationAgent* thisStation = new StationAgent(STATION_SIZE, station_spot_list)；	//a station of 10 spots
+	DoubleLinkList* station_spot_list = new DoubleLinkList();	//create a spotlist for a station
+	StationAgent* thisStation = new StationAgent(STATION_SIZE, station_spot_list);	//a station of 10 spots
 	//initialize spots and put them into spot-list
-	for (int i=0, i<STATION_SIZE, i++)
+	for (int i = 0; i < STATION_SIZE; i++)
 	{
 
 		spot* new_spot = new spot();
@@ -38,11 +38,11 @@ int main ()
 	}
 	//create cars
 	//and put them into a car-list
-	doublylinkedlist_t car_list = new doublylinkedlist ();	//to record all the cars in the region
+	DoubleLinkList* car_list = new DoubleLinkList();	//to record all the cars in the region
 	for (int i = 0; i < INITIAL_CAR_SIZE; i++)
 	{
-		doublelinkedlist* new_car_ranking_list = new doublelinkedlist ();	//to store the spots and time from this car
-		carAgent* new_car = new carAgent (new_car_ranking_list);
+		DoubleLinkList* new_car_ranking_list = new DoubleLinkList();	//to store the spots and time from this car
+		carAgent* new_car = new carAgent ();
 		new_car.initCar();
 		car_list.AddBack(new_car,0);
 	}

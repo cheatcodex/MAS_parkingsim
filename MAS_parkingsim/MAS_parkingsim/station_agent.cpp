@@ -19,8 +19,7 @@ Functions:
 
 using namespace std;
 
-StationAgent::StationAgent(int setLength, class doublylinkedlist* stationSpotList)
-	:length(setLength), spots(stationSpotList)
+StationAgent::StationAgent()
 {}
 
 StationAgent::~StationAgent()
@@ -29,11 +28,19 @@ StationAgent::~StationAgent()
 	cout << "StationAgent Class Destructor" <<endl;
 }
 
+void StationAgent::initStationAgent()
+{
+	srand(time(NULL));
+	length = rand() % 5 + 20;
+	DoubleLinkList* spotList = new DoubleLinkList();
+	spots = spotList;
+}
+
 int StationAgent::getTotSpots()
 {
 	return length;
 }
-doublylinkedlist* StationAgent::getStationSpotList()
+DoubleLinkList* StationAgent::getStationSpotList()
 {
 	return spots;
 }

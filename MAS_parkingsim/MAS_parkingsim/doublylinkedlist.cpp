@@ -14,7 +14,7 @@ DoubleLinkList::DoubleLinkList ()
 {}
 
 DoubleLinkList::~DoubleLinkList()
-{clear();}
+{Clear();}
 
 int DoubleLinkList::Size()
 {return size;}
@@ -117,7 +117,7 @@ bool DoubleLinkList::RemoveFront()
 }  
 bool DoubleLinkList::RemoveAt(int pos)  
 {  
-    DoubleNode<T>* pNode=NULL;  
+    DoubleNode<T, T2>* pNode=NULL;  
     if (isempty())  
     {  
         std::cout<<"the link list is empty"<<std::endl;  
@@ -141,7 +141,7 @@ bool DoubleLinkList::RemoveAt(int pos)
     }  
     else  
     {  
-        DoubleNode<T>* pPreNode=GetPointAt(pos-1);  
+        DoubleNode<T, T2>* pPreNode=GetPointAt(pos-1);  
         pNode=pPreNode->next;  
         if (pos==size)  
         {   

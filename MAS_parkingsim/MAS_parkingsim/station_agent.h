@@ -5,11 +5,11 @@ File Name: station_agent.h
 #ifndef STATION_AGENT_H
 #define STATION_AGENT_H
 
-//#include "car_agent.h"
-//#include "station_agent.h"
-//#include "MAS_lib.h"
+#include "car_agent.h"
+#include "station_agent.h"
 #include <stdio.h>
 #include <string>
+#include <stdlib.h>
 #include <iostream>
 #include <cmath>
 #include <vector>
@@ -21,21 +21,22 @@ using namespace std;
 class StationAgent
 {
 	public:
-		StationAgent(int setLength, class doublelinkedlist* stationSpotList);
+		StationAgent();
 		~StationAgent();
-		class doublelinkedlist* getStationSpotList();
 		//void getStationInfo();
 		//void getSpotInfo(int Spot_number);
+		void initStationAgent();
 		int getTotSpots();
+		DoubleLinkList* getStationSpotList();
 		//void updateStation(StationAgent& station);
 	private:
 		int length; // Total Spots size
 		//int Avail_spots;	
-		class doublelinkedlist* spots;	//spotlist: element1:spot_t, element2:0
+		DoubleLinkList* spots;	//spotlist: element1:spot_t, element2:0
 		//vector< vector<int> > all_spots_status;
 		//vector<int> this_spot_status; // 3: availability, x, y
 	/* data */
-};
+}StationAgent;
 
 
 class spot
