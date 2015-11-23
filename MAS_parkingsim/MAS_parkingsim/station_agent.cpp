@@ -18,17 +18,17 @@ Functions:
 
 using namespace std;
 template<typename T, typename T2>
-StationAgent::StationAgent()
+StationAgent<T, T2>::StationAgent()
 {}
 template<typename T, typename T2>
-StationAgent::~StationAgent()
+StationAgent<T, T2>::~StationAgent()
 {
 	spots.Clear();
 	cout << "StationAgent Class Destructor" <<endl;
 }
 
 template<typename T, typename T2>
-void StationAgent::initStationAgent()
+void StationAgent<T, T2>::initStationAgent()
 {
 	srand(time(NULL));
 	length = rand() % 5 + 20;
@@ -36,12 +36,12 @@ void StationAgent::initStationAgent()
 	spots = spotList;
 }
 template<typename T, typename T2>
-int StationAgent::getTotSpots()
+int StationAgent<T, T2>::getTotSpots()
 {
 	return length;
 }
 template<typename T, typename T2>
-DoubleLinkList* StationAgent::getStationSpotList()
+DoubleLinkList<T, T2>* StationAgent<T, T2>::getStationSpotList()
 {
 	return spots;
 }

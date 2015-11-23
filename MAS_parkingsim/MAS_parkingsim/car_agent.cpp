@@ -20,42 +20,42 @@ Functions:
 //#include <vector>
 using namespace std;
 template<typename T, typename T2>
-carAgent::carAgent()
+carAgent<T, T2>::carAgent()
 {}
 
 template<typename T, typename T2>
-carAgent::~carAgent()
+carAgent<T, T2>::~carAgent()
 {
 	spot_list->Clear();
 }
 template<typename T, typename T2>
-carAgent::location::location()
+carAgent<T, T2>::location::location()
 	:Location_x(0), Location_y(0)	//initialization to be modified
 {}
 
 template<typename T, typename T2>
-carAgent::destination::destination()
+carAgent<T, T2>::destination::destination()
 	: dest_spot(NULL), Time(0)
 {}
 template<typename T, typename T2>
-carAgent::destination::~destination()
+carAgent<T, T2>::destination::~destination()
 {
 	delete dest_spot;
 }
 template<typename T, typename T2>
-bool carAgent::location::updateLocation(int& x, int& y)
+bool carAgent<T, T2>::location::updateLocation(int& x, int& y)
 {
 	Location_x = x;
 	Location_y = y;
 }
 template<typename T, typename T2>
-bool carAgent::destination::updateDest(class spot* new_spot, int& time)
+bool carAgent<T, T2>::destination::updateDest(class spot* new_spot, int& time)
 {
 	dest_spot = new_spot;
 	Time = time;
 }
 template<typename T, typename T2>
-void carAgent::initCar()	//init update location of my car
+void carAgent<T, T2>::initCar()	//init update location of my car
 {
 	srand(time(NULL));
 	int x= rand() % 5 + 5;
@@ -68,13 +68,13 @@ void carAgent::initCar()	//init update location of my car
 	spot_list = spotList;
 }
 template<typename T, typename T2>
-DoubleLinkList* carAgent::getSpotList ()
+DoubleLinkList<T, T2>* carAgent<T, T2>::getSpotList ()
 {
 	return spot_list;
 }
 
 template<typename T, typename T2>
-void carAgent::updateDestination (DoubleNode* spot_node)
+void carAgent<T, T2>::updateDestination (DoubleNode<T, T2>* spot_node)
 {
 	destination* destination_m = new destination();
 	class spot* nearest_spot = spot_node->element1;
@@ -84,9 +84,9 @@ void carAgent::updateDestination (DoubleNode* spot_node)
 }
 
 template<typename T, typename T2>
-int GetSortNum(DoubleLinkList* rankinglist, int timeToSpot)
+int GetSortNum(DoubleLinkList<T, T2>* rankinglist, int timeToSpot)
 {
-	DoubleNode* currentSpot = rankinglist->head;
+	DoubleNode<T, T2>* currentSpot = rankinglist->head;
 	int time_currentSpot;
 	int count = 1;
 	while (currentSpot != rankinglist->tail)
@@ -102,10 +102,10 @@ int GetSortNum(DoubleLinkList* rankinglist, int timeToSpot)
 	}
 }
 template<typename T, typename T2>
-DoubleLinkList* computeRank(carAgent* car, DoubleLinkList* station_spot)
+DoubleLinkList<T, T2>* computeRank(carAgent<T, T2>* car, DoubleLinkList<T, T2>* station_spot)
 {
-	DoubleLinkList* ranking = new DoubleLinkList();
-	DoubleNode* currentSpot = station_spot->head;	//DoubleNode<spot_t, timefromcartospot>
+	DoubleLinkList<T, T2>* ranking = new DoubleLinkList();
+	DoubleNode<T, T2>* currentSpot = station_spot->head;	//DoubleNode<spot_t, timefromcartospot>
 	if (*ranking.isempty())
 		return NULL;
 	srand(time(NULL));

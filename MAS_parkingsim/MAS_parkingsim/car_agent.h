@@ -49,13 +49,13 @@ class carAgent
 
 
 template<typename T, typename T2>
-int calculateTime (spot* spot, carAgent* Mycar);	//caculate time from mycar to each of the spots (random?)
+int calculateTime(spot* spot, carAgent<T, T2>* Mycar);	//caculate time from mycar to each of the spots (random?)
 template<typename T, typename T2>
-DoubleLinkList* computeRank(carAgent* car, DoubleLinkList* station_spot);	//compute time to all spots and rank; save the result to a linklist.
+DoubleLinkList<T, T2>* computeRank(carAgent<T, T2>* car, DoubleLinkList<T, T2>* station_spot);	//compute time to all spots and rank; save the result to a linklist.
 template<typename T, typename T2>
-int compareTime(carAgent* Mycar, DoubleLinkList* CarList);	//compare the first option with other cars first option. If my car is the most competitive one, return 0; otherwise, point to the next option and return 1. 
+int compareTime(carAgent<T, T2>* Mycar, DoubleLinkList<T, T2>* CarList);	//compare the first option with other cars first option. If my car is the most competitive one, return 0; otherwise, point to the next option and return 1. 
 template<typename T, typename T2>
-int GetSortNum (DoubleLinkList* rankinglist, int timeToSpot);
+int GetSortNum (DoubleLinkList<T, T2>* rankinglist, int timeToSpot);
 template<typename T, typename T2>
-bool setSecondNearestDest (carAgent* Mycar);	//if can' get the first spot, make dest to second spot
+bool setSecondNearestDest (carAgent<T, T2>* Mycar);	//if can' get the first spot, make dest to second spot
 #endif
