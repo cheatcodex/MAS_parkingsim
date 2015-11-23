@@ -22,7 +22,7 @@ class carAgent
 			int Location_x;
 			int Location_y;
 			location();
-			bool updateLocation(int& x, int& y);
+			void updateLocation(int& x, int& y);
 		};
 		location* my_location;
 		struct destination
@@ -43,7 +43,7 @@ class carAgent
 		~carAgent();	//destructor
 		void initCar();	//call right after constructor
 		DoubleLinkList* getSpotList ();
-		void updateDestination (DoubleNode* spot_node);	//update my car's location and destination.
+		void updateDestination(DoubleNode<T, T2>* spot_node);	//update my car's location and destination.
 		//updateMember not yet implemented
 };
 

@@ -43,7 +43,7 @@ carAgent<T, T2>::destination::~destination()
 	delete dest_spot;
 }
 template<typename T, typename T2>
-bool carAgent<T, T2>::location::updateLocation(int& x, int& y)
+bool carAgent<T, T2>::location<T, T2>::updateLocation(int& x, int& y)
 {
 	Location_x = x;
 	Location_y = y;
