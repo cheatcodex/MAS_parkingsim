@@ -5,8 +5,6 @@ File Name: station_agent.h
 #ifndef STATION_AGENT_H
 #define STATION_AGENT_H
 
-#include "car_agent.h"
-#include "station_agent.h"
 #include <stdio.h>
 #include <string>
 #include <stdlib.h>
@@ -17,7 +15,6 @@ File Name: station_agent.h
 
 using namespace std;
 
-//template <int Tot_spots>
 class StationAgent
 {
 	public:

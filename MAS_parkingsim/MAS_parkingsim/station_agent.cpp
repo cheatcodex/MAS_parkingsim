@@ -6,7 +6,6 @@ Functions:
 	3. Update availability
 */
 
-#include "car_agent.h"
 #include "station_agent.h"
 #include "doublylinkedlist.h"
 #include <string>
@@ -21,13 +20,14 @@ using namespace std;
 
 StationAgent::StationAgent()
 {}
-
+template<typename T, typename T2>
 StationAgent::~StationAgent()
 {
 	spots.Clear();
 	cout << "StationAgent Class Destructor" <<endl;
 }
 
+template<typename T, typename T2>
 void StationAgent::initStationAgent()
 {
 	srand(time(NULL));
@@ -40,6 +40,7 @@ int StationAgent::getTotSpots()
 {
 	return length;
 }
+template<typename T, typename T2>
 DoubleLinkList* StationAgent::getStationSpotList()
 {
 	return spots;

@@ -4,24 +4,27 @@
 #include <string>
 
 using namespace std;
-
+template<typename T, typename T2>
 DoubleNode::DoubleNode(const T& theElement, const T2& theElement2, DoubleNode* Prev, DoubleNode* Next)
 	:element1(theElement), element2(theElement2), prev(Prev), next(Next)
 {}
-
+template<typename T, typename T2>
 DoubleLinkList::DoubleLinkList ()
 	:head(NULL),tail(NULL),size(0)
 {}
-
+template<typename T, typename T2>
 DoubleLinkList::~DoubleLinkList()
 {Clear();}
 
+template<typename T, typename T2>
 int DoubleLinkList::Size()
 {return size;}
 
+template<typename T, typename T2>
 bool DoubleLinkList::isempty()
 {return size==0?true:false;}
 
+template<typename T, typename T2>
 void DoubleLinkList::Clear()  
 {  
     const int nums=Size();  
@@ -37,6 +40,7 @@ void DoubleLinkList::Clear()
     }  
 }  
 
+template<typename T, typename T2>
 DoubleNode<T, T2>* DoubleLinkList::GetPointAt(int pos)  
 {  
     DoubleNode<T, T2>* pNode=NULL;  
@@ -50,6 +54,7 @@ DoubleNode<T, T2>* DoubleLinkList::GetPointAt(int pos)
     }  
     return pNode;  
 }  
+template<typename T, typename T2>
 bool DoubleLinkList::AddNodeAt (T val, T2 val2, int pos)
 {
 	DoubleNode<T, T2>* pNode=NULL;  
@@ -74,6 +79,7 @@ bool DoubleLinkList::AddNodeAt (T val, T2 val2, int pos)
     size++;  
     return true;  
 }
+template<typename T, typename T2>
 void DoubleLinkList::AddFront(T val, T2 val2)  
 {  
     DoubleNode<T, T2>* pNode=new DoubleNode<T, T2>(val, val2);  
@@ -90,6 +96,7 @@ void DoubleLinkList::AddFront(T val, T2 val2)
     }  
     size++;  
 }  
+template<typename T, typename T2>
 void DoubleLinkList::AddBack(T val, T2 val2)  
 {  
     DoubleNode<T, T2>* pNode=new DoubleNode<T, T2>(val, val2);  
@@ -106,15 +113,17 @@ void DoubleLinkList::AddBack(T val, T2 val2)
     }  
     size++;  
 } 
-
+template<typename T, typename T2>
 bool DoubleLinkList::RemoveBack()  
 {  
     return RemoveAt(size);  
 }  
+template<typename T, typename T2>
 bool DoubleLinkList::RemoveFront()  
 {  
     return RemoveAt(1);  
 }  
+template<typename T, typename T2>
 bool DoubleLinkList::RemoveAt(int pos)  
 {  
     DoubleNode<T, T2>* pNode=NULL;  

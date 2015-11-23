@@ -21,9 +21,10 @@ public:
 	DoubleNode(const T& theElement, const T2& theElement2, DoubleNode* Prev, DoubleNode* Next);
 };
 
+template<typename T, typename T2>
 class DoubleLinkList
 {
-private:
+public:
 	class DoubleNode* head;
 	class DoubleNode* tail;
 	int size;

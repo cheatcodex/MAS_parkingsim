@@ -20,14 +20,15 @@ Functions:
 #include <stdlib.h>
 #include <iostream>
 using namespace std;
-
+template<typename T, typename T2>
 #define STATION_SIZE 10
 #define INITIAL_CAR_SIZE 8
 int main ()
 {
 	//create a station
 	DoubleLinkList* station_spot_list = new DoubleLinkList();	//create a spotlist for a station
-	StationAgent* thisStation = new StationAgent(STATION_SIZE, station_spot_list);	//a station of 10 spots
+	StationAgent* thisStation = new StationAgent();	//a station of 10 spots
+	thisStation.init();
 	//initialize spots and put them into spot-list
 	for (int i = 0; i < STATION_SIZE; i++)
 	{
@@ -54,7 +55,7 @@ int main ()
 	while (current_car_node != car_list->tail)
 	{
 		current_car_node->element1->new_car_ranking_list = computeRank(current_car_node, station_spot_list);
-		current_car_node->element1->updateDest(new_car_ranking_list->head);		//update destination and time
+		current_car_node->element1->updateDestination(new_car_ranking_list->head);		//update destination and time
 		current_car_node = current_car_node->next;
 	}
 	//compare cars' time to the same destination
