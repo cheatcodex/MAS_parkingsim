@@ -19,34 +19,36 @@ Functions:
 #include <time.h>
 //#include <vector>
 using namespace std;
-
+template<typename T, typename T2>
 carAgent::carAgent()
-{
-		
-}
+{}
+
 template<typename T, typename T2>
 carAgent::~carAgent()
 {
 	spot_list->Clear();
 }
-
+template<typename T, typename T2>
 carAgent::location::location()
 	:Location_x(0), Location_y(0)	//initialization to be modified
 {}
 
+template<typename T, typename T2>
 carAgent::destination::destination()
 	: dest_spot(NULL), Time(0)
 {}
+template<typename T, typename T2>
 carAgent::destination::~destination()
 {
 	delete dest_spot;
 }
-
+template<typename T, typename T2>
 bool carAgent::location::updateLocation(int& x, int& y)
 {
 	Location_x = x;
 	Location_y = y;
 }
+template<typename T, typename T2>
 bool carAgent::destination::updateDest(class spot* new_spot, int& time)
 {
 	dest_spot = new_spot;
@@ -65,13 +67,14 @@ void carAgent::initCar()	//init update location of my car
 	DoubleLinkList* spotList = new DoubleLinkList();
 	spot_list = spotList;
 }
-
+template<typename T, typename T2>
 DoubleLinkList* carAgent::getSpotList ()
 {
 	return spot_list;
 }
+
 template<typename T, typename T2>
-void carAgent::updateDestination (class DoubleNode* spot_node)
+void carAgent::updateDestination (DoubleNode* spot_node)
 {
 	destination* destination_m = new destination();
 	class spot* nearest_spot = spot_node->element1;
@@ -79,6 +82,7 @@ void carAgent::updateDestination (class DoubleNode* spot_node)
 	destination_m->updateDest(nearest_spot, time);
 	my_destination = destination_m;
 }
+
 template<typename T, typename T2>
 int GetSortNum(DoubleLinkList* rankinglist, int timeToSpot)
 {

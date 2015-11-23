@@ -17,7 +17,7 @@ Functions:
 #include <time.h>		/*time*/
 
 using namespace std;
-
+template<typename T, typename T2>
 StationAgent::StationAgent()
 {}
 template<typename T, typename T2>
@@ -35,7 +35,7 @@ void StationAgent::initStationAgent()
 	DoubleLinkList* spotList = new DoubleLinkList();
 	spots = spotList;
 }
-
+template<typename T, typename T2>
 int StationAgent::getTotSpots()
 {
 	return length;

@@ -1,8 +1,8 @@
 /*
 File Name: car_agent.h
 */
-#ifndef CAR_AGENT
-#define CAR_AGENT
+#ifndef CAR_AGENT_H
+#define CAR_AGENT_H
 
 #include "station_agent.h"
 #include "doublylinkedlist.h"
@@ -12,7 +12,7 @@ File Name: car_agent.h
 
 
 using namespace std;
-
+template<typename T, typename T2>
 class carAgent
 {
 	public:
@@ -28,23 +28,24 @@ class carAgent
 		struct destination
 		{
 		public:
-			class spot* dest_spot;
+			spot* dest_spot;
 			int Time;
+		public:
 			destination();
 			~destination();
 			bool updateDest(class spot* new_spot, int& time);
 		};
 		destination* my_destination;
-		class DoubleLinkList* spot_list;	//ptr to doublylinklist of mycar's ranked spot list
+		DoubleLinkList* spot_list;	//ptr to doublylinklist of mycar's ranked spot list
 
 	public:
 		carAgent();	//constructor
 		~carAgent();	//destructor
 		void initCar();	//call right after constructor
 		DoubleLinkList* getSpotList ();
-		void updateDestination (class DoubleNode* spot_node);	//update my car's location and destination.
+		void updateDestination (DoubleNode* spot_node);	//update my car's location and destination.
 		//updateMember not yet implemented
-}carAgent;
+};
 
 
 template<typename T, typename T2>

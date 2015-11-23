@@ -14,7 +14,7 @@ File Name: station_agent.h
 #include "doublylinkedlist.h"
 
 using namespace std;
-
+template<typename T, typename T2>
 class StationAgent
 {
 	public:
@@ -33,7 +33,7 @@ class StationAgent
 		//vector< vector<int> > all_spots_status;
 		//vector<int> this_spot_status; // 3: availability, x, y
 	/* data */
-}StationAgent;
+};
 
 
 class spot
@@ -43,12 +43,12 @@ private:
 	int location_y;	
 	int availability;	//0:empty, 1:full
 public:
-	spot(int x, int y, int avail);
 	spot();
+	spot(int x, int y, int avail);
 	~spot();
 	void initSpot();
 	bool updateSpot(int avail);
 	int getAvailabilityofSpot ();
-}spot;
+};
 
 #endif
