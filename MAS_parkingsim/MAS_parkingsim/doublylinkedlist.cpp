@@ -5,27 +5,27 @@
 
 using namespace std;
 template<typename T, typename T2>
-DoubleNode::DoubleNode(const T& theElement, const T2& theElement2, DoubleNode* Prev, DoubleNode* Next)
+DoubleNode<T,T2>::DoubleNode(const T& theElement, const T2& theElement2, DoubleNode* Prev, DoubleNode* Next)
 	:element1(theElement), element2(theElement2), prev(Prev), next(Next)
 {}
 template<typename T, typename T2>
-DoubleLinkList::DoubleLinkList ()
+DoubleLinkList<T, T2>::DoubleLinkList ()
 	:head(NULL),tail(NULL),size(0)
 {}
 template<typename T, typename T2>
-DoubleLinkList::~DoubleLinkList()
+DoubleLinkList<T, T2>::~DoubleLinkList()
 {Clear();}
 
 template<typename T, typename T2>
-int DoubleLinkList::Size()
+int DoubleLinkList<T, T2>::Size()
 {return size;}
 
 template<typename T, typename T2>
-bool DoubleLinkList::isempty()
+bool DoubleLinkList<T, T2>::isempty()
 {return size==0?true:false;}
 
 template<typename T, typename T2>
-void DoubleLinkList::Clear()  
+void DoubleLinkList<T, T2>::Clear()
 {  
     const int nums=Size();  
     if (!isempty())  
@@ -41,7 +41,7 @@ void DoubleLinkList::Clear()
 }  
 
 template<typename T, typename T2>
-DoubleNode<T, T2>* DoubleLinkList::GetPointAt(int pos)  
+DoubleNode<T, T2>* DoubleLinkList<T, T2>::GetPointAt(int pos)
 {  
     DoubleNode<T, T2>* pNode=NULL;  
     if (pos<=0 || pos>size)  
@@ -55,7 +55,7 @@ DoubleNode<T, T2>* DoubleLinkList::GetPointAt(int pos)
     return pNode;  
 }  
 template<typename T, typename T2>
-bool DoubleLinkList::AddNodeAt (T val, T2 val2, int pos)
+bool DoubleLinkList<T, T2>::AddNodeAt (T val, T2 val2, int pos)
 {
 	DoubleNode<T, T2>* pNode=NULL;  
     if (pos<=0 || pos>size)  
@@ -80,7 +80,7 @@ bool DoubleLinkList::AddNodeAt (T val, T2 val2, int pos)
     return true;  
 }
 template<typename T, typename T2>
-void DoubleLinkList::AddFront(T val, T2 val2)  
+void DoubleLinkList<T, T2>::AddFront(T val, T2 val2)
 {  
     DoubleNode<T, T2>* pNode=new DoubleNode<T, T2>(val, val2);  
     if (isempty())  
@@ -97,7 +97,7 @@ void DoubleLinkList::AddFront(T val, T2 val2)
     size++;  
 }  
 template<typename T, typename T2>
-void DoubleLinkList::AddBack(T val, T2 val2)  
+void DoubleLinkList<T, T2>::AddBack(T val, T2 val2)
 {  
     DoubleNode<T, T2>* pNode=new DoubleNode<T, T2>(val, val2);  
     if (isempty())  
@@ -114,17 +114,17 @@ void DoubleLinkList::AddBack(T val, T2 val2)
     size++;  
 } 
 template<typename T, typename T2>
-bool DoubleLinkList::RemoveBack()  
+bool DoubleLinkList<T, T2>::RemoveBack()
 {  
     return RemoveAt(size);  
 }  
 template<typename T, typename T2>
-bool DoubleLinkList::RemoveFront()  
+bool DoubleLinkList<T, T2>::RemoveFront()
 {  
     return RemoveAt(1);  
 }  
 template<typename T, typename T2>
-bool DoubleLinkList::RemoveAt(int pos)  
+bool DoubleLinkList<T, T2>::RemoveAt(int pos)
 {  
     DoubleNode<T, T2>* pNode=NULL;  
     if (isempty())  
