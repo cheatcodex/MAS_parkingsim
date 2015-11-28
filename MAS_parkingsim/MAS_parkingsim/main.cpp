@@ -20,56 +20,56 @@ Functions:
 #include <stdlib.h>
 #include <iostream>
 using namespace std;
-template<typename T, typename T2>
+//template<typename spot*, typename int>
 #define STATION_SIZE 10
 #define INITIAL_CAR_SIZE 8
 int main ()
 {
 	//create a station
-	DoubleLinkList* station_spot_list = new DoubleLinkList();	//create a spotlist for a station
-	StationAgent* thisStation = new StationAgent();	//a station of 10 spots
-	thisStation.init();
+	DoubleLinkList<spot*, int>* station_spot_list = new DoubleLinkList<spot*, int>();	//create a spotlist for a station
+	StationAgent<spot*, int>* thisStation = new StationAgent<spot*, int>();	//a station of 10 spots
+	thisStation->initStationAgent();
 	//initialize spots and put them into spot-list
 	for (int i = 0; i < STATION_SIZE; i++)
 	{
 
 		spot* new_spot = new spot();
 		new_spot->initSpot();
-		staiton_spot_list.AddBack(new_spot, 0);
+		station_spot_list->AddBack(new_spot, 0);
 	}
 	//create cars
 	//and put them into a car-list
-	DoubleLinkList* car_list = new DoubleLinkList();	//to record all the cars in the region
+	DoubleLinkList<carAgent<spot*,int>*, int>* car_list = new DoubleLinkList<carAgent<spot*, int>*, int>();	//to record all the cars in the region
 	for (int i = 0; i < INITIAL_CAR_SIZE; i++)
 	{
-		DoubleLinkList* new_car_ranking_list = new DoubleLinkList();	//to store the spots and time from this car
-		carAgent* new_car = new carAgent ();
-		new_car.initCar();
-		car_list.AddBack(new_car,0);
+		DoubleLinkList<spot*, int>* new_car_ranking_list = new DoubleLinkList<spot*, int>();	//to store the spots and time from this car
+		carAgent<spot*, int>* new_car = new carAgent<spot*, int>();
+		new_car->initCar();
+		car_list->AddBack(new_car,0);
 	}
 	//simulation begins
 	//rank the spots for each car
 	//set the nearest spot as the destination
-	DoubleNode* current_car_node = car_list->head;
+	DoubleNode<carAgent<spot*, int>*, int>* current_car_node = car_list->head;
 	int timeToSpot;
 	while (current_car_node != car_list->tail)
 	{
-		current_car_node->element1->new_car_ranking_list = computeRank(current_car_node, station_spot_list);
-		current_car_node->element1->updateDestination(new_car_ranking_list->head);		//update destination and time
+		current_car_node->element->spot_list = computeRank(current_car_node, station_spot_list);
+		current_car_node->element->updateDestination(current_car_node->element->spot_list->head);		//update destination and time
 		current_car_node = current_car_node->next;
 	}
 	//compare cars' time to the same destination
 	bool flag = 1;
-	while (flag > 0)
+	while (flag == 0)
 	{
 		flag = 0;
 		current_car_node = car_list->head;
 		while(current_car_node != car_list->tail)
 		{
-			if (compareTime (current_car_node->element1, car_list))		//if mycar is not the most competitive one
+			if (compareTime (current_car_node->element, car_list))		//if mycar is not the most competitive one
 			{
 				flag = 1;	//if there is any car that has to reassign spot, loop again
-				if (!setSecondNerestDest(current_car_node->element1))	//set the dest to the second nearest spot
+				if (!setSecondNearestDest(current_car_node->element))	//set the dest to the second nearest spot
 					cout<<"can't find spot for this car"<<endl;
 			}
 			current_car_node = current_car_node->next;

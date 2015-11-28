@@ -12,50 +12,47 @@ File Name: car_agent.h
 
 
 using namespace std;
+class destination
+{
+public:
+	spot* dest_spot;
+	int Time;
+public:
+	destination();
+	~destination();
+	void updateDest(class spot* new_spot, int& time);
+};
+class location
+{
+public:
+	location();
+	void updateLoc(int& x, int& y);
+private:
+	int Location_x;
+	int Location_y;
+};
 template<typename T, typename T2>
 class carAgent
 {
 	public:
-		struct location
-		{
-		public:
-			int Location_x;
-			int Location_y;
-			location();
-			void updateLocation(int& x, int& y);
-		};
 		location* my_location;
-		struct destination
-		{
-		public:
-			spot* dest_spot;
-			int Time;
-		public:
-			destination();
-			~destination();
-			bool updateDest(class spot* new_spot, int& time);
-		};
 		destination* my_destination;
-		DoubleLinkList* spot_list;	//ptr to doublylinklist of mycar's ranked spot list
+		DoubleLinkList<spot*, int>* spot_list;	//ptr to doublylinklist of mycar's ranked spot list
 
 	public:
 		carAgent();	//constructor
 		~carAgent();	//destructor
 		void initCar();	//call right after constructor
-		DoubleLinkList* getSpotList ();
-		void updateDestination(DoubleNode<T, T2>* spot_node);	//update my car's location and destination.
+		DoubleLinkList<spot*, int>* getSpotList ();
+		void updateDestination(DoubleNode<spot*, int>* spot_node);	//update my car's destination: spot*, int time
+		void updateLocation(int&x, int&y);
 		//updateMember not yet implemented
 };
 
 
-template<typename T, typename T2>
-int calculateTime(spot* spot, carAgent<T, T2>* Mycar);	//caculate time from mycar to each of the spots (random?)
-template<typename T, typename T2>
-DoubleLinkList<T, T2>* computeRank(carAgent<T, T2>* car, DoubleLinkList<T, T2>* station_spot);	//compute time to all spots and rank; save the result to a linklist.
-template<typename T, typename T2>
-int compareTime(carAgent<T, T2>* Mycar, DoubleLinkList<T, T2>* CarList);	//compare the first option with other cars first option. If my car is the most competitive one, return 0; otherwise, point to the next option and return 1. 
-template<typename T, typename T2>
-int GetSortNum (DoubleLinkList<T, T2>* rankinglist, int timeToSpot);
-template<typename T, typename T2>
-bool setSecondNearestDest (carAgent<T, T2>* Mycar);	//if can' get the first spot, make dest to second spot
+int calculateTime(spot* thespot, carAgent<spot*, int>* Mycar);	//caculate time from mycar to each of the spots (random?)
+DoubleLinkList<spot*, int>* computeRank(DoubleNode<carAgent<spot*, int>*, int>*, DoubleLinkList<spot*, int>* station_spot);	//compute time to all spots and rank; save the result to a linklist.
+int compareTime(carAgent<spot*, int>* Mycar, DoubleLinkList<carAgent<spot*, int>*, int>* CarList);	//compare the first option with other cars first option. If my car is the most competitive one, return 0; otherwise, point to the next option and return 1. 
+int GetSortNum (DoubleLinkList<spot*, int>* rankinglist, int timeToSpot);
+bool setSecondNearestDest (carAgent<spot*, int>* Mycar);	//if can' get the first spot, make dest to second spot
 #endif

@@ -17,31 +17,30 @@ Functions:
 #include <time.h>		/*time*/
 
 using namespace std;
-template<typename T, typename T2>
-StationAgent<T, T2>::StationAgent()
+
+StationAgent<spot*, int>::StationAgent()
 {}
-template<typename T, typename T2>
-StationAgent<T, T2>::~StationAgent()
+
+StationAgent<spot*, int>::~StationAgent()
 {
-	spots.Clear();
+	spots->Clear();
 	cout << "StationAgent Class Destructor" <<endl;
 }
 
-template<typename T, typename T2>
-void StationAgent<T, T2>::initStationAgent()
+void StationAgent<spot*, int>::initStationAgent()
 {
 	srand(time(NULL));
 	length = rand() % 5 + 20;
-	DoubleLinkList* spotList = new DoubleLinkList();
+	DoubleLinkList<spot*, int>* spotList = new DoubleLinkList<spot*, int>();
 	spots = spotList;
 }
-template<typename T, typename T2>
-int StationAgent<T, T2>::getTotSpots()
+
+int StationAgent<spot*, int>::getTotSpots()
 {
 	return length;
 }
-template<typename T, typename T2>
-DoubleLinkList<T, T2>* StationAgent<T, T2>::getStationSpotList()
+
+DoubleLinkList<spot*, int>* StationAgent<spot*, int>::getStationSpotList()
 {
 	return spots;
 }

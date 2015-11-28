@@ -14,6 +14,20 @@ File Name: station_agent.h
 #include "doublylinkedlist.h"
 
 using namespace std;
+class spot
+{
+private:
+	int location_x;
+	int location_y;
+	int availability;	//0:empty, 1:full
+public:
+	spot();
+	spot(int x, int y, int avail);
+	~spot();
+	void initSpot();
+	bool updateSpot(int avail);
+	int getAvailabilityofSpot();
+};
 template<typename T, typename T2>
 class StationAgent
 {
@@ -24,31 +38,18 @@ class StationAgent
 		//void getSpotInfo(int Spot_number);
 		void initStationAgent();
 		int getTotSpots();
-		DoubleLinkList* getStationSpotList();
+		DoubleLinkList<spot*, int>* getStationSpotList();
 		//void updateStation(StationAgent& station);
 	private:
 		int length; // Total Spots size
 		//int Avail_spots;	
-		DoubleLinkList* spots;	//spotlist: element1:spot_t, element2:0
+		DoubleLinkList<spot*, int>* spots;	//spotlist: element1:spot_t, element2:0
 		//vector< vector<int> > all_spots_status;
 		//vector<int> this_spot_status; // 3: availability, x, y
 	/* data */
 };
 
+//template<typename T, typename T2>
 
-class spot
-{
-private:
-	int location_x;
-	int location_y;	
-	int availability;	//0:empty, 1:full
-public:
-	spot();
-	spot(int x, int y, int avail);
-	~spot();
-	void initSpot();
-	bool updateSpot(int avail);
-	int getAvailabilityofSpot ();
-};
 
 #endif
