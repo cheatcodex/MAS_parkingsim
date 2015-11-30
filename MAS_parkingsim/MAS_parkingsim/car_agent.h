@@ -20,13 +20,15 @@ public:
 public:
 	destination();
 	~destination();
-	void updateDest(class spot* new_spot, int& time);
+	void updateDest(spot* new_spot, const int& time);
 };
 class location
 {
 public:
 	location();
-	void updateLoc(int& x, int& y);
+	void updateLoc(const int& x, const int& y);
+	int getLocationXofCar();
+	int getLocationYofCar();
 private:
 	int Location_x;
 	int Location_y;
@@ -55,4 +57,6 @@ DoubleLinkList<spot*, int>* computeRank(DoubleNode<carAgent<spot*, int>*, int>*,
 int compareTime(carAgent<spot*, int>* Mycar, DoubleLinkList<carAgent<spot*, int>*, int>* CarList);	//compare the first option with other cars first option. If my car is the most competitive one, return 0; otherwise, point to the next option and return 1. 
 int GetSortNum (DoubleLinkList<spot*, int>* rankinglist, int timeToSpot);
 bool setSecondNearestDest (carAgent<spot*, int>* Mycar);	//if can' get the first spot, make dest to second spot
+
 #endif
+

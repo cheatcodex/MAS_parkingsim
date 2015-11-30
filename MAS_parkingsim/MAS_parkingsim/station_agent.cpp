@@ -18,29 +18,28 @@ Functions:
 
 using namespace std;
 
-StationAgent<spot*, int>::StationAgent()
+template<> StationAgent<spot*, int>::StationAgent()
 {}
 
-StationAgent<spot*, int>::~StationAgent()
+template<> StationAgent<spot*, int>::~StationAgent()
 {
 	spots->Clear();
 	cout << "StationAgent Class Destructor" <<endl;
 }
 
-void StationAgent<spot*, int>::initStationAgent()
+template<> void StationAgent<spot*, int>::initStationAgent(DoubleLinkList<spot*, int>* theSpotList)
 {
 	srand(time(NULL));
 	length = rand() % 5 + 20;
-	DoubleLinkList<spot*, int>* spotList = new DoubleLinkList<spot*, int>();
-	spots = spotList;
+	spots = theSpotList;
 }
 
-int StationAgent<spot*, int>::getTotSpots()
+template<> int StationAgent<spot*, int>::getTotSpots()
 {
 	return length;
 }
 
-DoubleLinkList<spot*, int>* StationAgent<spot*, int>::getStationSpotList()
+template<> DoubleLinkList<spot*, int>* StationAgent<spot*, int>::getStationSpotList()
 {
 	return spots;
 }
@@ -77,4 +76,8 @@ int spot::getAvailabilityofSpot ()
 	return availability;
 }
 
+int spot::getLocationXofSpot ()
+{	return location_x;}
+int spot::getLocationYofSpot ()
+{	return location_y;}
 

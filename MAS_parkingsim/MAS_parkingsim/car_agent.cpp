@@ -32,55 +32,58 @@ destination::~destination()
 	delete dest_spot;
 }
 
-void location::updateLoc(int& x, int& y)
+void location::updateLoc(const int& x, const int& y)
 {
 	Location_x = x;
 	Location_y = y;
 }
-
-void destination::updateDest(class spot* new_spot, int& time)
+int location::getLocationXofCar()
+{	return Location_x;}
+int location::getLocationYofCar()
+{	return Location_y;}
+void destination::updateDest(class spot* new_spot, const int& time)
 {
 	dest_spot = new_spot;
 	Time = time;
 }
 
-carAgent<spot*, int>::carAgent()
+template<> carAgent<spot*, int>::carAgent()
 {}
 
-carAgent<spot*, int>::~carAgent()
+template<> carAgent<spot*, int>::~carAgent()
 {
 	spot_list->Clear();
 }
 
-void carAgent<spot*, int>::updateLocation(int&x, int&y)
+template<> void carAgent<spot*, int>::updateLocation(int&x, int&y)
 {
 	my_location->updateLoc(x, y);
 }
-void carAgent<spot*, int>::initCar()	//init update location of my car
+template<> void carAgent<spot*, int>::initCar()	//init update location of my car
 {
 	srand(time(NULL));
 	int x= rand() % 5 + 5;
 	srand(time(NULL));
 	int y= rand() % 5 + 5;
 	location* location_m = new location();
-	updateLocation(x, y);
+	destination* destination_m = new destination();
+	my_destination = destination_m;
 	my_location = location_m;
+	updateLocation(x, y);
 	DoubleLinkList<spot*, int>* spotList = new DoubleLinkList<spot*, int>();
 	spot_list = spotList;
 }
 
-DoubleLinkList<spot*, int>* carAgent<spot*, int>::getSpotList ()
+template<> DoubleLinkList<spot*, int>* carAgent<spot*, int>::getSpotList ()
 {
 	return spot_list;
 }
 
-void carAgent<spot*, int>::updateDestination (DoubleNode<spot*, int>* spot_node)
+template<> void carAgent<spot*, int>::updateDestination (DoubleNode<spot*, int>* spot_node)
 {
-	destination* destination_m = new destination();
 	class spot* nearest_spot = spot_node->element;
 	int time = spot_node->element2;
-	destination_m->updateDest(nearest_spot, time);
-	my_destination = destination_m;
+	my_destination->updateDest(nearest_spot, time);
 }
 
 
@@ -92,22 +95,24 @@ int GetSortNum(DoubleLinkList<spot*, int>* rankinglist, int timeToSpot)
 	while (currentSpot != rankinglist->tail)
 	{
 		time_currentSpot = currentSpot->element2;
-		if (timeToSpot >= time_currentSpot)
-			return count;
+		if (timeToSpot <= time_currentSpot)
+		{
+			count++;
+			currentSpot = currentSpot->next;
+		}	
 		else
 		{
-			currentSpot = currentSpot->next;
-			count ++;
+			return count;
 		}
 	}
+	if (currentSpot == rankinglist->tail)
+		return count;
 }
 
 DoubleLinkList<spot*, int>* computeRank(DoubleNode<carAgent<spot*, int>*, int>*, DoubleLinkList<spot*, int>* station_spot)
 {
 	DoubleLinkList<spot*, int>* ranking = new DoubleLinkList<spot*, int>();
 	DoubleNode< spot*, int>* currentSpot = station_spot->head;	//DoubleNode<spot_t, timefromcartospot>
-	if (ranking->isempty())
-		return NULL;
 	srand(time(NULL));
 	int time_car_spot = rand() % 5 + 5;
 	ranking->AddFront(currentSpot->element, time_car_spot);	//first spot in the list  
@@ -118,6 +123,7 @@ DoubleLinkList<spot*, int>* computeRank(DoubleNode<carAgent<spot*, int>*, int>*,
 		time_car_spot = rand() % 5 + 5;
 		int sortNum = GetSortNum(ranking, time_car_spot);
 		ranking->AddNodeAt (currentSpot->element, time_car_spot , sortNum);
+		currentSpot = currentSpot->next;
 	}
 	return ranking;
 }
@@ -131,6 +137,8 @@ int compareTime(carAgent<spot*, int>* Mycar, DoubleLinkList<carAgent<spot*, int>
 		{
 			if (Mycar->my_destination->Time < currentCar->element2)
 				return 1;
+			else 
+				currentCar = currentCar->next;
 		}
 		else 
 			currentCar = currentCar->next;

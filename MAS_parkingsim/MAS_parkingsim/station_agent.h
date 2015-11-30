@@ -27,6 +27,8 @@ public:
 	void initSpot();
 	bool updateSpot(int avail);
 	int getAvailabilityofSpot();
+	int getLocationXofSpot ();
+	int getLocationYofSpot ();
 };
 template<typename T, typename T2>
 class StationAgent
@@ -36,7 +38,7 @@ class StationAgent
 		~StationAgent();
 		//void getStationInfo();
 		//void getSpotInfo(int Spot_number);
-		void initStationAgent();
+		void initStationAgent(DoubleLinkList<spot*, int>* theSpotList);
 		int getTotSpots();
 		DoubleLinkList<spot*, int>* getStationSpotList();
 		//void updateStation(StationAgent& station);
@@ -53,3 +55,4 @@ class StationAgent
 
 
 #endif
+

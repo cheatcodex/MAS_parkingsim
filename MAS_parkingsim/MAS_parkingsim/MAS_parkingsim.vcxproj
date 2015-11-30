@@ -25,7 +25,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="car_agent.cpp" />
-    <ClCompile Include="doublylinkedlist.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="station_agent.cpp" />
   </ItemGroup>
