@@ -29,7 +29,7 @@ template<> StationAgent<spot*, int>::~StationAgent()
 
 template<> void StationAgent<spot*, int>::initStationAgent(DoubleLinkList<spot*, int>* theSpotList)
 {
-	srand(time(NULL));
+	//srand(time(NULL));
 	length = rand() % 5 + 20;
 	spots = theSpotList;
 }
@@ -54,9 +54,9 @@ spot::~spot()
 
 void spot::initSpot()	//call this function right after the constructor
 {
-	srand(time(NULL));
+	//srand(time(NULL));
 	location_x = rand() % 5 + 5;
-	srand(time(NULL));
+	//srand(time(NULL));
 	location_y = rand() % 5 +10;
 	return;	
 }

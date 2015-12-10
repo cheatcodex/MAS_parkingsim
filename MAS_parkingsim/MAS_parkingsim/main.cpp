@@ -11,6 +11,9 @@ Functions:
 		c. Update Destination and Time; Update Station availabilities
 		d. Output Result(s)
 	5. Output Final Result
+
+Bug fixes:
+12/10 srand() and rand() reordered in code 
 */
 
 #include "car_agent.h"
@@ -19,12 +22,14 @@ Functions:
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
+#include <time.h>
 using namespace std;
 //template<typename spot*, typename int>
 #define STATION_SIZE 5
 #define INITIAL_CAR_SIZE 3
 int main ()
 {
+	srand(time(NULL));
 	//create a station
 	DoubleLinkList<spot*, int>* station_spot_list = new DoubleLinkList<spot*, int>();	//create a spotlist for a station
 	StationAgent<spot*, int>* thisStation = new StationAgent<spot*, int>();	//a station of 10 spots
@@ -52,12 +57,16 @@ int main ()
 	//create cars
 	//and put them into a car-list
 	DoubleLinkList<carAgent<spot*,int>*, int>* car_list = new DoubleLinkList<carAgent<spot*, int>*, int>();	//to record all the cars in the region
+	
 	for (int i = 0; i < INITIAL_CAR_SIZE; i++)
 	{
 		DoubleLinkList<spot*, int>* new_car_ranking_list = new DoubleLinkList<spot*, int>();	//to store the spots and time from this car
 		carAgent<spot*, int>* new_car = new carAgent<spot*, int>();
+		//printf("Initializing car # %d \t", i + 1);
+		
 		new_car->initCar();
 		car_list->AddBack(new_car,0);
+
 	}
 	DoubleNode<carAgent<spot*,int>*, int>* current_car_test = car_list->head;
 	count =1;
@@ -90,6 +99,7 @@ int main ()
 	{
 		count_spot=1;
 		rank_node_test = current_car_test->element->spot_list->head;
+		printf("\n");
 		while(rank_node_test!=NULL)
 		{
 			printf("car#%d: rankedspot#%d: x:%d, y:%d, time:%d\n",count, count_spot,rank_node_test->element->getLocationXofSpot(), rank_node_test->element->getLocationYofSpot(),rank_node_test->element2);

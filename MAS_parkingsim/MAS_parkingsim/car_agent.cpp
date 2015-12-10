@@ -61,10 +61,15 @@ template<> void carAgent<spot*, int>::updateLocation(int&x, int&y)
 }
 template<> void carAgent<spot*, int>::initCar()	//init update location of my car
 {
-	srand(time(NULL));
-	int x= rand() % 5 + 5;
-	srand(time(NULL));
-	int y= rand() % 5 + 5;
+	//srand(time(NULL));
+	int r1 = rand();
+	int x= rand() % 10 + 1;
+	//printf("rand 1 %d \t",r1);
+	//printf("x location: %d ",x);
+	r1 = rand();
+	int y= rand() % 10 + 1;
+	//printf("y location: %d \n", y);
+	//printf("rand 2 %d \n", r1);
 	location* location_m = new location();
 	destination* destination_m = new destination();
 	my_destination = destination_m;
@@ -113,13 +118,13 @@ DoubleLinkList<spot*, int>* computeRank(DoubleNode<carAgent<spot*, int>*, int>*,
 {
 	DoubleLinkList<spot*, int>* ranking = new DoubleLinkList<spot*, int>();
 	DoubleNode< spot*, int>* currentSpot = station_spot->head;	//DoubleNode<spot_t, timefromcartospot>
-	srand(time(NULL));
+	//srand(time(NULL));
 	int time_car_spot = rand() % 5 + 5;
 	ranking->AddFront(currentSpot->element, time_car_spot);	//first spot in the list  
 	currentSpot = currentSpot->next;
 	while (currentSpot != station_spot->tail)
 	{
-		srand(time(NULL));
+		//srand(time(NULL));
 		time_car_spot = rand() % 5 + 5;
 		int sortNum = GetSortNum(ranking, time_car_spot);
 		ranking->AddNodeAt (currentSpot->element, time_car_spot , sortNum);
