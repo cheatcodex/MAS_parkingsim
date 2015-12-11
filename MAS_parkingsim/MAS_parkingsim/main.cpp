@@ -40,7 +40,9 @@ int main ()
 
 		spot* new_spot = new spot();
 		new_spot->initSpot();
-		station_spot_list->AddBack(new_spot, 0);
+		if (new_spot->checkSpot(station_spot_list))
+			station_spot_list->AddBack(new_spot, 0);
+		else i--;
 	}
 	thisStation->initStationAgent(station_spot_list);
 	DoubleNode<spot*, int>* current_spot_test = (thisStation->getStationSpotList())->head;
@@ -112,24 +114,50 @@ int main ()
 	//printf("rank cars and set initial destinations: done!\n");
 	//compare cars' time to the same destination
 	bool flag = 1;
+	int count_car;
+	int count_real_car;
 	while (flag != 0)
 	{
 		flag = 0;
 		current_car_node = car_list->head;
+		count_car = 1; 
+		count_real_car = 1;
 		while(current_car_node != NULL)
 		{
-			if (compareTime (current_car_node->element, car_list))		//if mycar is not the most competitive one
+			if (current_car_node->element2 == 1)
 			{
-				flag = 1;	//if there is any car that has to reassign spot, loop again
-				if (!setSecondNearestDest(current_car_node->element))	//set the dest to the second nearest spot
-					cout<<"can't find spot for this car"<<endl;
+				current_car_node = current_car_node->next;
 			}
-			printf("current car's destination and time: x:%d, y:%d, time:%d\n",current_car_node->element->my_destination->dest_spot->getLocationXofSpot(), current_car_node->element->my_destination->dest_spot->getLocationYofSpot(), current_car_node->element->my_destination->Time);
-			current_car_node = current_car_node->next;
+			else
+			{
+				if (compareTime(current_car_node->element, car_list))		//if mycar is not the most competitive one
+				{
+					flag = 1;	//if there is any car that has to reassign spot, loop again
+					if (!setSecondNearestDest(current_car_node->element))	//set the dest to the second nearest spot
+					{
+						cout << "can't find spot for this car" << endl;
+						return -1;
+					}
+
+					printf("car#%d destination and time: x:%d, y:%d, time:%d\n", count_real_car, current_car_node->element->my_destination->dest_spot->getLocationXofSpot(), current_car_node->element->my_destination->dest_spot->getLocationYofSpot(), current_car_node->element->my_destination->Time);
+					current_car_node = current_car_node->next;
+				}
+				else
+				{
+					printf("car#%d destination and time: x:%d, y:%d, time:%d\n", count_real_car, current_car_node->element->my_destination->dest_spot->getLocationXofSpot(), current_car_node->element->my_destination->dest_spot->getLocationYofSpot(), current_car_node->element->my_destination->Time);
+					current_car_node->element2 = 1;	//meaning already assigned
+					current_car_node = current_car_node->next;
+					//car_list->RemoveAt(count_car);
+
+					count_car--;
+				}
+			}
+			count_car++;
+			count_real_car++;
 		} 
 	}
-	if (flag == 0)
-	{
+	//if (flag == 0)
+	//{
 		current_car_test = car_list->head;
 		count =1;
 		while (current_car_test!=NULL)
@@ -139,7 +167,7 @@ int main ()
 			current_car_test = current_car_test->next;
 		}
 		cout<<"end of simulation"<<endl;
-	}
+	//}
 	return 0;
 }
 

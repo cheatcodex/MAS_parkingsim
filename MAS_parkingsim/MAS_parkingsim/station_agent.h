@@ -25,8 +25,10 @@ public:
 	spot(int x, int y, int avail);
 	~spot();
 	void initSpot();
+	bool checkSpot(DoubleLinkList<spot*, int>* theSpotList);	//check if two spot are the same
 	bool updateSpot(int avail);
 	int getAvailabilityofSpot();
+	void updateAvailability(int avail);
 	int getLocationXofSpot ();
 	int getLocationYofSpot ();
 };

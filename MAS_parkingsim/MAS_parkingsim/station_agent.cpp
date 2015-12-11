@@ -55,10 +55,25 @@ spot::~spot()
 void spot::initSpot()	//call this function right after the constructor
 {
 	//srand(time(NULL));
-	location_x = rand() % 5 + 5;
+	location_x = rand() % 5 + 10;
 	//srand(time(NULL));
 	location_y = rand() % 5 +10;
 	return;	
+}
+bool spot::checkSpot(DoubleLinkList<spot*, int>* theSpotList)
+{
+	if (theSpotList->Size() == 0)
+		return 1;
+	DoubleNode<spot*, int>* currentSpot = theSpotList->head;
+	while (currentSpot != NULL)
+	{
+		if (location_x == currentSpot->element->location_x && location_y == currentSpot->element->location_y)
+			return 0;
+		else
+			currentSpot = currentSpot->next;
+	}
+	if (currentSpot == NULL)
+		return 1;
 }
 bool spot::updateSpot(int avail)
 {
@@ -70,7 +85,10 @@ bool spot::updateSpot(int avail)
 		return true;
 	}
 }
-
+void spot::updateAvailability(int avail)
+{
+	availability = avail;
+}
 int spot::getAvailabilityofSpot ()
 {
 	return availability;
