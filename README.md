@@ -1,1 +1,6 @@
 # MAS_parkingsim
+Multi Agent Simulation for Parking
+
+The project simulates a parking situation, where the driver will know the number of empty street parking spots and where they are. Larger cities already have such system in place. The goal is to minimize the time needed for one to look for parking spots, assuming each "agent" is a individual driver with a individual decision making system. Imagine this simulation runs on the backend of Waze (own by Google now), where users show up on the map. The system therefore, can help with determining what are one's best chance of getting to a spot comparing to others who are heading towards the same destination. Also, if the users have preferences for prioritizing spots over price, or neighborhood safety, the simulation can also consider that parameter after transcribing to a coefficient. 
+
+Using MAS, the system can assume the individuality of each agent and preserve the decision making process independent. The system will attempt to park each car individually after a number of iterations. The system then outputs the chances of each agent getting to their desired spots. Once the drivers are empowered by this knowledge, they will first save their time circling around, and secondly save gas to reduce CO2 emission. 
